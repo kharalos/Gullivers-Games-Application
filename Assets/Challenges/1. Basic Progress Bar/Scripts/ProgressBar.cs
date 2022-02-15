@@ -84,6 +84,7 @@ namespace Challenges._1._Basic_Progress_Bar.Scripts
             changeValue = Mathf.Lerp(changeValue, desiredValue, baseSpeed * Time.deltaTime);
 
             percentageText.text = Mathf.Round(changeValue * 100).ToString() + "%";
+            percentageText.rectTransform.offsetMin = new Vector2(0, 0);
 
             fillBar.rectTransform.localScale = new Vector2(changeValue, 1f);
 
