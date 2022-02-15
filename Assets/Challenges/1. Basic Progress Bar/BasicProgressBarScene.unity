@@ -768,7 +768,6 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1608455057}
-  m_ColorGraphics: []
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -902,7 +901,6 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1821396767}
-  m_ColorGraphics: []
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -1103,38 +1101,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 709837551}
     m_Modifications:
-    - target: {fileID: 346470967024580479, guid: 8948ea5d894e5489fb0de2f5e1860c01, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    - target: {fileID: 346470967024580479, guid: 8948ea5d894e5489fb0de2f5e1860c01, type: 3}
-      propertyPath: m_fontSizeMax
-      value: 72
-      objectReference: {fileID: 0}
-    - target: {fileID: 346470967024580479, guid: 8948ea5d894e5489fb0de2f5e1860c01, type: 3}
-      propertyPath: m_fontSizeMin
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 346470967024580479, guid: 8948ea5d894e5489fb0de2f5e1860c01, type: 3}
-      propertyPath: m_enableKerning
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 346470967024580479, guid: 8948ea5d894e5489fb0de2f5e1860c01, type: 3}
-      propertyPath: m_isOrthographic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 346470967024580479, guid: 8948ea5d894e5489fb0de2f5e1860c01, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    - target: {fileID: 346470967024580479, guid: 8948ea5d894e5489fb0de2f5e1860c01, type: 3}
-      propertyPath: m_enableWordWrapping
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 346470967024580479, guid: 8948ea5d894e5489fb0de2f5e1860c01, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4329741971777574132, guid: 8948ea5d894e5489fb0de2f5e1860c01, type: 3}
       propertyPath: m_Name
       value: ProgressBar
@@ -1222,14 +1188,6 @@ PrefabInstance:
     - target: {fileID: 4329741971777574133, guid: 8948ea5d894e5489fb0de2f5e1860c01, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4660936319929948686, guid: 8948ea5d894e5489fb0de2f5e1860c01, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4660936319929948686, guid: 8948ea5d894e5489fb0de2f5e1860c01, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8948ea5d894e5489fb0de2f5e1860c01, type: 3}
