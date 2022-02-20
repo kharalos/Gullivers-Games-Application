@@ -32,6 +32,9 @@ namespace Challenges._2._Clickable_Object.Scripts
         private InteractionMethod allowedInteractionMethods;
 
 
+        event OnClickableClicked OnClick;
+        OnClickableClicked clickCallback;
+        private float objectSelectedTime;
 
         /// <summary>
         /// Checks if the given interaction method is valid for this clickable object.
@@ -49,7 +52,7 @@ namespace Challenges._2._Clickable_Object.Scripts
         /// </summary>
         public void SetInteractionMethod(InteractionMethod method)
         {
-            
+            allowedInteractionMethods = method;
         }
         
         
@@ -59,6 +62,8 @@ namespace Challenges._2._Clickable_Object.Scripts
         /// <param name="callback">Function to invoke</param>
         public void RegisterToClickable(OnClickableClicked callback)
         {
+            if(clickCallback == null) clickCallback = callback;
+            OnClick += callback;
         }
 
         /// <summary>
@@ -67,6 +72,7 @@ namespace Challenges._2._Clickable_Object.Scripts
         /// <param name="callback">Function previously given</param>
         public void UnregisterFromClickable(OnClickableClicked callback)
         {
+            OnClick -= clickCallback;
         }
 
         /// <summary>
@@ -76,6 +82,7 @@ namespace Challenges._2._Clickable_Object.Scripts
         /// <exception cref="InvalidInteractionMethodException">If tapping is not allowed for this clickable</exception>
         public void RegisterToClickableTap(OnClickableClickedUnspecified onTapCallback) 
         {
+            //OnClick = onTapCallback;
         }
         
         /// <summary>
@@ -85,6 +92,72 @@ namespace Challenges._2._Clickable_Object.Scripts
         /// <exception cref="InvalidInteractionMethodException">If double tapping is not allowed for this clickable</exception>
         public void RegisterToClickableDoubleTap(OnClickableClickedUnspecified onTapCallback) 
         {
+            //OnClick = onTapCallback;
+        }
+        //
+        private void OnTap(){
+            OnClick(this, InteractionMethod.Tap);
+            UnregisterFromClickable(OnClick);
+        }
+        private void OnTapnHold(){
+            OnClick(this, InteractionMethod.TapAndHold);
+            UnregisterFromClickable(OnClick);
+        }
+        private void OnDoubleTap(){
+            OnClick(this, InteractionMethod.DoubleTap);
+            UnregisterFromClickable(OnClick);
+        }
+
+
+        /// <summary>
+        /// OnMouseDown is called when the user has pressed the mouse button while
+        /// over the GUIElement or Collider.
+        /// </summary>
+        void OnMouseDown()
+        {
+            RegisterToClickable(clickCallback);
+            if(objectSelectedTime == 0){
+                objectSelectedTime = Time.time;
+                if(IsInteractionMethodValid(ClickableObject.InteractionMethod.Tap))
+                {
+                    OnTap();
+                }
+            }
+            else{
+                CancelInvoke();
+                if(IsInteractionMethodValid(ClickableObject.InteractionMethod.DoubleTap))
+                {
+                    OnDoubleTap();
+                }
+            }
+        }
+
+        /// <summary>
+        /// OnMouseDrag is called when the user has clicked on a GUIElement or Collider
+        /// and is still holding down the mouse.
+        /// </summary>
+        void OnMouseDrag()
+        {
+            if(OnClick == null) return;
+            if(objectSelectedTime + 0.5f < Time.time) 
+            {
+                if(IsInteractionMethodValid(ClickableObject.InteractionMethod.TapAndHold))
+                {
+                    OnTapnHold();
+                }
+            }
+        }
+        /// <summary>
+        /// OnMouseUp is called when the user has released the mouse button.
+        /// </summary>
+        void OnMouseUp()
+        {
+            Invoke("ResetClickTime",0.2f);
+        }
+
+        void ResetClickTime()
+        {
+            objectSelectedTime = 0;
         }
         
     }
