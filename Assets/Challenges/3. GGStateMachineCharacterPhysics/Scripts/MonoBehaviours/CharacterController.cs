@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Challenges._3._GGStateMachineCharacterPhysics.Scripts.States;
 using GGPlugins.GGStateMachine.Scripts.Abstract;
 using GGPlugins.GGStateMachine.Scripts.Data;
@@ -99,8 +99,8 @@ namespace Challenges._3._GGStateMachineCharacterPhysics.Scripts.MonoBehaviours
 
         #region EDIT
         // You should only need to edit in this region, you can add any variables you wish.
-        
-
+        [SerializeField] private LayerMask colliderLayerMask;
+        [SerializeField] private Transform bodyTransform;
        
         //Add your states under this function
         private void SetupStateMachineStates()
@@ -130,8 +130,36 @@ namespace Challenges._3._GGStateMachineCharacterPhysics.Scripts.MonoBehaviours
         // (A) -> (-1,0)
         public void SetCurrentMovement(Vector2 xzPlaneMovementVector)
         {
-            
+            transform.position += Vector2Extension.ToXZPlane(xzPlaneMovementVector) *  characterMovementConfig.MAXSpeed * Time.deltaTime;
         }
+
+        [SerializeField] private float colliderStrength = 10f;
+        /// <summary>
+        /// Update is called every frame, if the MonoBehaviour is enabled.
+        /// </summary>
+        void FixedUpdate()
+        {
+            if (Physics.CheckSphere(bodyTransform.position, 1.3f, colliderLayerMask))
+            {
+                Collider[] hitColliders = Physics.OverlapSphere(bodyTransform.position, 1.3f, colliderLayerMask);
+                foreach (var hitCollider in hitColliders)
+                {
+                    Vector3 direction = (bodyTransform.position - hitCollider.ClosestPoint(bodyTransform.position)).normalized;
+                    transform.position += direction * Time.deltaTime * colliderStrength;
+                    Debug.DrawRay(transform.position, direction * 5f, Color.yellow, 0.5f);
+                }
+            }
+            else if (Physics.Raycast(transform.position, Vector3.down, 0.2f, colliderLayerMask))
+            {
+
+            }
+            else{
+                transform.position += Vector3.down * characterMovementConfig.Gravity * Time.deltaTime;
+                Debug.DrawRay(transform.position, Vector3.down * 2f, Color.blue, 0.5f);
+                }
+        }
+
+
         
         #endregion
         
